@@ -105,7 +105,7 @@ our final word error rate: 0.083
 
 ## 9. License
 
-MIT License © 2025 Gioia Zheng and contributors
+MIT License © 2025
 
 ---
 
@@ -113,5 +113,3 @@ MIT License © 2025 Gioia Zheng and contributors
 
 > This repository is a **personal fork** of the original group project and includes additional testing and analysis modules for independent evaluation purposes.
 > The base model and data pipeline were collaboratively developed as part of the course assignment.
-
-```
