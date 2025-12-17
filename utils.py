@@ -4,26 +4,32 @@ import torch.nn as nn
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 import os
 import numpy as np
-from sklearn.metrics import accuracy_score
 # from torchmetrics.text import CharErrorRate, WordErrorRate
 from torchmetrics.functional.text import char_error_rate as cer
 from torchmetrics.functional.text import word_error_rate as wer
 from itertools import groupby
 
 def label_to_strings(predictions, targets, chars):
+    """Convert model logits and target labels to decoded strings.
+
+    Args:
+        predictions: numpy array with shape (seq_len, batch_size, num_classes).
+        targets: numpy array with shape (seq_len, batch_size).
+        chars: list of vocabulary symbols.
+
+    Returns:
+        Tuple of (predicted_strings, target_strings).
+    """
     # use argmax to find the index of the highest probability
-    # shape of predictions: (seq_len, batch_size, num_classes)
-    argmax_preds = np.argmax(predictions, axis=-1) # now the shape is (seq_len, batch_size)
-    # argmax_preds = np.argmax(predictions, axis=1)
-    
+    argmax_preds = np.argmax(predictions, axis=-1)  # now the shape is (seq_len, batch_size)
+
     # transpose to get the shape (batch_size, seq_len) in order to get batch_size number of sequences
-    # print('shape after taking argmax: ', argmax_preds.shape)
-    grouped_preds = [[k for k,_ in groupby(preds)] for preds in argmax_preds]
-    # grouped_preds = [[k for k,_ in groupby(preds)] for preds in argmax_preds.T] 
+    grouped_preds = [[k for k, _ in groupby(preds)] for preds in argmax_preds.T]
+    grouped_targets = [[k for k, _ in groupby(tgt)] for tgt in np.asarray(targets).T]
 
     # convert indexes to chars
-    texts = ["".join([chars[k] for k in group if k < len(chars)]) for group in grouped_preds]
-    target_texts = ["".join([chars[k] for k in group if k < len(chars)]) for group in targets]
+    texts = ["".join(chars[k] for k in group if k < len(chars)) for group in grouped_preds]
+    target_texts = ["".join(chars[k] for k in group if k < len(chars)) for group in grouped_targets]
 
     return texts, target_texts
 
@@ -49,16 +55,10 @@ class CERMetric(Metric):
         self.total = 0
 
     def update(self, y_pred, y_true):
-        # Assuming y_pred and y_true are 1D tensors
-        # y_pred = y_pred.argmax(dim=1)
-        # cer = 1 - accuracy_score(y_true.numpy(), y_pred.numpy())
         y_pred = y_pred.detach().cpu().numpy()
         y_true = y_true.detach().cpu().numpy()
         y_pred, y_true = label_to_strings(y_pred, y_true, self.vocab)
-        print(f'y_pred: {y_pred} with shape: {len(y_pred)}')
-        print(f'y_true: {y_true} with shape: {len(y_true)}')
-        value = cer(y_true, y_pred)
-        print(f'the cer value is: {value} with value: {value.item()}')
+        value = cer(preds=y_pred, target=y_true)
         self.total += value.item()
         self.count += 1
         # self.values.append(value.item())
@@ -81,17 +81,10 @@ class WERMetric(Metric):
         self.total = 0
 
     def update(self, y_pred, y_true):
-        # Assuming y_pred and y_true are 1D tensors
-        # y_pred = y_pred.argmax(dim=1)
-        # wer = 1 - accuracy_score(y_true.numpy(), y_pred.numpy())
-        # self.values.append(wer)
         y_pred = y_pred.detach().cpu().numpy()
         y_true = y_true.detach().cpu().numpy()
         y_pred, y_true = label_to_strings(y_pred, y_true, self.vocab)
-        # print(f'y_pred: {y_pred}')
-        # print(f'y_true: {y_true}')
-        value = wer(preds = y_true, target = y_pred)
-        # self.values.append(value.item())
+        value = wer(preds=y_pred, target=y_true)
         self.total += value.item()
         self.count += 1
     
@@ -249,7 +242,7 @@ def decode_ctc(outputs, chars, blank_index):
     #     decoded_strings.append(decoded_string)
 
     # return decoded_strings
-        # For each batch in the sequence
+    # For each batch in the sequence
     for batch in zip(*predicted_indexes):
         # Remove repeated characters and blank tokens
         batch = [index for index, _ in groupby(batch) if index != blank_index]
