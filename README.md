@@ -1,115 +1,133 @@
-# Handwritten Text Recognizer (Course Project)
+# Handwritten OCR System (Deep Learning)
 
-This repository contains a **handwritten text recognition system** developed as part of the **Artificial Intelligence Laboratory** course at *Sapienza University of Rome*.
+![Python](https://img.shields.io/badge/language-python-blue)
+![PyTorch](https://img.shields.io/badge/framework-pytorch-red)
+![Task](https://img.shields.io/badge/task-OCR-green)
+![Status](https://img.shields.io/badge/status-experimental-yellow)
 
-It is based on the original group project implemented in **Java**, with additional testing and evaluation scripts contributed in **Python**.  
-The project explores techniques in **computer vision**, **deep learning**, and **optical character recognition (OCR)**.
+A deep learning-based **handwritten text recognition system** built using CNN-RNN architectures with **CTC loss**, designed for sequence-to-text transcription from scanned images.
 
----
-
-## 1. Overview
-
-The goal of this project was to design and implement a system capable of recognizing handwritten text from scanned images using deep learning models.  
-The system combines convolutional and recurrent layers with the **Connectionist Temporal Classification (CTC)** loss to align text sequences with image data.
-
-The testing and evaluation modules included in this version were developed by **Gioia Zheng** to measure model performance and visualize results.
+This project explores **end-to-end optical character recognition (OCR)** pipelines, combining computer vision, sequence modeling, and evaluation metrics.
 
 ---
 
-## 2. Project Objectives
+# What This Project Demonstrates
 
-- Implement a **neural network-based OCR pipeline**
-- Explore **feature extraction**, **image preprocessing**, and **text decoding**
-- Evaluate model accuracy using **Character Error Rate (CER)** and **Word Error Rate (WER)**
-- Conduct experiments on real-world datasets (IAM Handwriting Database)
-- Understand trade-offs between model complexity and recognition accuracy
-
----
-
-## 3. Technologies and Tools
-
-| Category | Technologies |
-|-----------|--------------|
-| **Languages** | Java, Python |
-| **Libraries** | PyTorch, NumPy, OpenCV, Matplotlib |
-| **Metrics** | CER (Character Error Rate), WER (Word Error Rate) |
-| **Frameworks** | TensorBoard for visualization |
-| **Dataset** | IAM Handwriting Database |
+- End-to-end **OCR pipeline design** (preprocessing → modeling → decoding)
+- Sequence modeling using **CNN + RNN + CTC**
+- Evaluation using **CER / WER metrics**
+- Practical experimentation on real-world dataset (IAM)
+- Integration of model inference and visualization tools
 
 ---
 
-## 4. Project Structure
+# System Overview
+
+The OCR pipeline follows a standard sequence-to-text architecture:
 
 ```
 
-Handwritten-Text-Recognizer/
-├── Model/                     # Trained model and checkpoints
+Input Image
+↓
+Preprocessing (grayscale, normalization, augmentation)
+↓
+CNN (feature extraction)
+↓
+RNN (sequence modeling)
+↓
+CTC Loss (alignment)
+↓
+Decoder (text prediction)
+↓
+Final Output
+
+```
+
+---
+
+# Key Features
+
+- CNN + RNN architecture for handwritten text recognition  
+- CTC-based alignment for variable-length sequences  
+- Image preprocessing and augmentation pipeline  
+- Evaluation metrics: **Character Error Rate (CER)** and **Word Error Rate (WER)**  
+- Visualization of predictions and model outputs  
+
+---
+
+# Tech Stack
+
+- **Python**
+- **PyTorch**
+- OpenCV
+- NumPy / Matplotlib
+- IAM Handwriting Dataset
+
+---
+
+# Project Structure
+
+```
+
+handwritten-ocr-system/
+├── Model/                     # Trained models and checkpoints
 ├── OCR_WebApp/                # GUI components
-├── data_loader.py             # Dataset handling
-├── preprocessor.py            # Image preprocessing and augmentation
-├── model1.py                  # Model definition (CNN + RNN + CTC)
-├── testing.py                 # Evaluation script (Python, by Gioia Zheng)
-├── test_sing.py               # Single-image testing example
-├── utils.py                   # Utility functions for data and metrics
-└── project_planning.ipynb     # Initial design and planning notes
+├── data_loader.py             # Dataset loading
+├── preprocessor.py            # Image preprocessing
+├── model1.py                  # CNN + RNN + CTC model
+├── testing.py                 # Evaluation pipeline
+├── test_sing.py               # Single image inference
+├── utils.py                   # Utility functions (metrics, decoding)
+└── project_planning.ipynb     # Initial experiments and notes
 
 ````
 
 ---
 
-## 5. How to Run (Python Evaluation)
+# Running the Project
 
-### Step 1 — Install dependencies
+## Install dependencies
 
 ```bash
 pip install torch torchvision numpy matplotlib opencv-python torchmetrics
 ````
 
-### Step 2 — Run the testing module
+## Run evaluation
 
 ```bash
 python testing.py
 ```
 
-This will evaluate the model on the IAM dataset and print results including CER and WER metrics.
-
 ---
 
-## 6. Sample Output
+# Example Output
 
-```bash
-our prediction: the quick brown fox
-our answer: the quick brown fox
-our final character error rate: 0.042
-our final word error rate: 0.083
+```
+prediction: the quick brown fox
+ground truth: the quick brown fox
+CER: 0.042
+WER: 0.083
 ```
 
 ---
 
-## 7. Contribution
+# Limitations
 
-| Name            | Role                 | Contribution                                                                  |
-| --------------- | -------------------- | ----------------------------------------------------------------------------- |
-| **Gioia Zheng** | Testing & Evaluation | Implemented Python test module, performance metrics, and output visualization |
-
----
-
-## 8. Course Information
-
-**Course:** Programming 2 (Java)
-**Degree Program:** Applied Computer Science and Artificial Intelligence
-**University:** Sapienza University of Rome
-**Academic Year:** 2022–2023
+* Model architecture is relatively simple (baseline-level)
+* No large-scale hyperparameter tuning
+* Limited dataset generalization
 
 ---
 
-## 9. License
+# Future Work
 
-MIT License © 2025
+* Transformer-based OCR models
+* Attention-based decoding
+* Data augmentation strategies
+* End-to-end training pipeline optimization
 
 ---
 
-## 10. Notes
+# License
 
-> This repository is a **personal fork** of the original group project and includes additional testing and analysis modules for independent evaluation purposes.
-> The base model and data pipeline were collaboratively developed as part of the course assignment.
+MIT License
