@@ -1,0 +1,42 @@
+experiment:
+  name: crnn_ctc_iam_baseline
+  seed: 2024
+  split_random_state: 42
+
+data:
+  dataset: IAM sentences
+  metadata_file: data/iam_sentences/metadata/sentences.txt
+  image_dir: data/iam_sentences/dataset
+  split:
+    train: 0.80
+    validation: 0.10
+    test: 0.10
+  filter:
+    skip_comment_lines: true
+    skip_metadata_status: err
+    require_image_file: true
+
+preprocessing:
+  grayscale: true
+  normalize_pixels: [0.0, 1.0]
+  augmentation: false
+
+model:
+  file: crnn_ctc.py
+  class: Model
+  input_channels: 1
+  cnn_blocks: 9
+  recurrent_layers:
+    - type: bidirectional_lstm
+      hidden_size: 256
+    - type: bidirectional_lstm
+      hidden_size: 64
+  dropout: 0.2
+  loss: ctc
+
+evaluation:
+  batch_size: 64
+  checkpoint: Model/model.pt
+  metrics:
+    - character_error_rate
+    - word_error_rate

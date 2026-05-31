@@ -110,14 +110,16 @@ our final word error rate: <WER>
 
 ---
 
-# Example Output
+# Training and Evaluation Config
 
-```
-prediction: the quick brown fox
-ground truth: the quick brown fox
-CER: 0.042
-WER: 0.083
-```
+The reproducibility settings are recorded in [configs/training_config.yaml](configs/training_config.yaml):
+
+- seed: `2024`
+- split random state: `42`
+- split: `80% train / 10% validation / 10% test`
+- checkpoint expected by evaluation: `Model/model.pt`
+
+The CER/WER results ledger is in [docs/evaluation.md](docs/evaluation.md). The repository does not currently include a reproducible checkpoint/log with verified CER and WER values, so the table marks the baseline result as pending instead of listing example numbers as measured results.
 
 ---
 
