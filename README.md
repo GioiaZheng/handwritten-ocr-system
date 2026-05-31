@@ -90,7 +90,7 @@ handwritten-ocr-system/
 git clone https://github.com/GioiaZheng/handwritten-ocr-system.git
 cd handwritten-ocr-system
 
-pip install torch torchvision numpy matplotlib opencv-python torchmetrics
+pip install -r requirements.txt
 
 # Put IAM sentence images under data/iam_sentences/dataset
 # and the metadata file at data/iam_sentences/metadata/sentences.txt.
@@ -120,6 +120,14 @@ The reproducibility settings are recorded in [configs/training_config.yaml](conf
 - checkpoint expected by evaluation: `Model/model.pt`
 
 The CER/WER results ledger is in [docs/evaluation.md](docs/evaluation.md). The repository does not currently include a reproducible checkpoint/log with verified CER and WER values, so the table marks the baseline result as pending instead of listing example numbers as measured results.
+
+Detailed setup, data layout, field definitions, and smoke-test instructions are documented in [REPRODUCIBILITY.md](REPRODUCIBILITY.md).
+
+Dataset-free smoke tests:
+
+```bash
+python -m unittest discover -s tests
+```
 
 ---
 
