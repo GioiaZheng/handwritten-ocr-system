@@ -74,9 +74,9 @@ handwritten-ocr-system/
 ├── OCR_WebApp/                # GUI components
 ├── data_loader.py             # Dataset loading
 ├── preprocessor.py            # Image preprocessing
-├── model1.py                  # CNN + RNN + CTC model
-├── testing.py                 # Evaluation pipeline
-├── test_sing.py               # Single image inference
+├── crnn_ctc.py                # CNN + RNN + CTC model
+├── evaluate.py                # Evaluation pipeline
+├── infer_single.py            # Single image inference
 ├── utils.py                   # Utility functions (metrics, decoding)
 └── project_planning.ipynb     # Initial experiments and notes
 
@@ -84,18 +84,28 @@ handwritten-ocr-system/
 
 ---
 
-# Running the Project
-
-## Install dependencies
+# Quickstart
 
 ```bash
+git clone https://github.com/GioiaZheng/handwritten-ocr-system.git
+cd handwritten-ocr-system
+
 pip install torch torchvision numpy matplotlib opencv-python torchmetrics
+
+# Put IAM sentence images under data/iam_sentences/dataset
+# and the metadata file at data/iam_sentences/metadata/sentences.txt.
+python evaluate.py
 ````
 
-## Run evaluation
+Expected output:
 
-```bash
-python testing.py
+```text
+number of batches in the test loader: <count>
+blank token: <id>
+our prediction: <decoded text>
+our answer: <ground truth text>
+our final character error rate: <CER>
+our final word error rate: <WER>
 ```
 
 ---
