@@ -21,6 +21,7 @@ class Preprocessor:
     def __call__(self, img, label:str, max_len : int = 32):
         # img = cv2.imread(img, cv2.IMREAD_GRAYSCALE)
         img, label = self.preprocess_img(img, label)
+        label = self._truncate_label(label, max_text_len=max_len)
         label = self.label_indexer(self.vocab, label)
         #label = self.label_padding(0, 32, label)
         label = self.label_padding(len(self.vocab), max_len, label)
@@ -140,6 +141,5 @@ class Preprocessor:
         padding_color = 0
         img = cv2.copyMakeBorder(resized_image, top, bottom, left, right, cv2.BORDER_CONSTANT, value=padding_color)
         return img
-
 
 

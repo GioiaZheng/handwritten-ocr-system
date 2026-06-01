@@ -36,6 +36,14 @@ class PreprocessorTest(unittest.TestCase):
         self.assertEqual(processed.shape, (64, 512))
         self.assertEqual(label, "abc")
 
+    def test_call_truncates_label_by_ctc_alignment_cost(self):
+        image = np.ones((20, 80), dtype=np.uint8) * 255
+        preprocessor = Preprocessor(image=None, vocab="bokepr")
+
+        _, label = preprocessor(image, "bookkeeper", max_len=4)
+
+        np.testing.assert_array_equal(label, np.array([0, 1, 1, 6]))
+
 
 if __name__ == "__main__":
     unittest.main()

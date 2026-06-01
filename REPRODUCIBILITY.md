@@ -82,7 +82,8 @@ example outputs separate from measured results.
 ## Smoke Tests
 
 The smoke tests do not require the IAM dataset or a trained checkpoint. They
-check deterministic preprocessing and label handling behavior:
+check deterministic preprocessing, CTC-safe label truncation, and label
+handling behavior:
 
 ```bash
 python -m unittest discover -s tests
