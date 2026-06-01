@@ -88,6 +88,10 @@ check deterministic preprocessing and label handling behavior:
 python -m unittest discover -s tests
 ```
 
+The GitHub Actions workflow runs these smoke tests with `numpy` and
+`opencv-python-headless`. Full training and evaluation dependencies remain in
+`requirements.txt`.
+
 ## Current Reproducibility Status
 
 | Artifact | Status |
