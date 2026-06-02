@@ -126,6 +126,7 @@ Detailed setup, data layout, field definitions, and smoke-test instructions are 
 Dataset-free smoke tests:
 
 ```bash
+python scripts/validate_training_config.py
 python -m unittest discover -s tests
 ```
 

@@ -86,12 +86,13 @@ check deterministic preprocessing, CTC-safe label truncation, and label
 handling behavior:
 
 ```bash
+python scripts/validate_training_config.py
 python -m unittest discover -s tests
 ```
 
 The GitHub Actions workflow runs these smoke tests with `numpy` and
-`opencv-python-headless`. Full training and evaluation dependencies remain in
-`requirements.txt`.
+`opencv-python-headless`, and validates the training configuration with
+`PyYAML`. Full training and evaluation dependencies remain in `requirements.txt`.
 
 ## Current Reproducibility Status
 
@@ -103,3 +104,4 @@ The GitHub Actions workflow runs these smoke tests with `numpy` and
 | Trained checkpoint | Not committed |
 | Verified CER/WER run | Pending |
 | Dataset-free smoke tests | Available |
+| Training config validation | Available |
