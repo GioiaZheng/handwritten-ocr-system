@@ -1,4 +1,4 @@
-torch>=2.0
+torch>=2.12.1
 torchvision>=0.15
 opencv-python>=4.8
 numpy>=1.24
