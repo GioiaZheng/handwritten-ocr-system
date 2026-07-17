@@ -1,5 +1,8 @@
 # Handwritten OCR System (Deep Learning)
 
+[![CI](https://github.com/GioiaZheng/handwritten-ocr-system/actions/workflows/ci.yml/badge.svg)](https://github.com/GioiaZheng/handwritten-ocr-system/actions/workflows/ci.yml)
+[![Secret scan](https://github.com/GioiaZheng/handwritten-ocr-system/actions/workflows/secret-scan.yml/badge.svg)](https://github.com/GioiaZheng/handwritten-ocr-system/actions/workflows/secret-scan.yml)
+
 ![Python](https://img.shields.io/badge/language-python-blue)
 ![PyTorch](https://img.shields.io/badge/framework-pytorch-red)
 ![Task](https://img.shields.io/badge/task-OCR-green)
