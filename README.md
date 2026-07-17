@@ -80,7 +80,7 @@ handwritten-ocr-system/
 ├── utils.py                   # Utility functions (metrics, decoding)
 └── project_planning.ipynb     # Initial experiments and notes
 
-````
+```
 
 ---
 
@@ -95,7 +95,7 @@ pip install -r requirements.txt
 # Put IAM sentence images under data/iam_sentences/dataset
 # and the metadata file at data/iam_sentences/metadata/sentences.txt.
 python evaluate.py
-````
+```
 
 Expected output:
 
