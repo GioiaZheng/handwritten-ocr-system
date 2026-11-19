@@ -1,5 +1,8 @@
 # Handwritten OCR System (Deep Learning)
 
+[![CI](https://github.com/GioiaZheng/handwritten-ocr-system/actions/workflows/ci.yml/badge.svg)](https://github.com/GioiaZheng/handwritten-ocr-system/actions/workflows/ci.yml)
+[![Secret scan](https://github.com/GioiaZheng/handwritten-ocr-system/actions/workflows/secret-scan.yml/badge.svg)](https://github.com/GioiaZheng/handwritten-ocr-system/actions/workflows/secret-scan.yml)
+
 ![Python](https://img.shields.io/badge/language-python-blue)
 ![PyTorch](https://img.shields.io/badge/framework-pytorch-red)
 ![Task](https://img.shields.io/badge/task-OCR-green)
@@ -80,7 +83,7 @@ handwritten-ocr-system/
 ├── utils.py                   # Utility functions (metrics, decoding)
 └── project_planning.ipynb     # Initial experiments and notes
 
-````
+```
 
 ---
 
@@ -95,7 +98,7 @@ pip install -r requirements.txt
 # Put IAM sentence images under data/iam_sentences/dataset
 # and the metadata file at data/iam_sentences/metadata/sentences.txt.
 python evaluate.py
-````
+```
 
 Expected output:
 
