@@ -4,5 +4,5 @@ opencv-python>=4.8
 numpy>=1.24
 matplotlib>=3.7
 torchmetrics>=1.2
-PyYAML>=6.0
+PyYAML>=6.0.3
 scikit-learn>=1.3
